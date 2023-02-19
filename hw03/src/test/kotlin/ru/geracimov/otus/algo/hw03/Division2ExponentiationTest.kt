@@ -83,6 +83,18 @@ class Division2ExponentiationTest {
 
         assertThat(actual).isCloseToWithDelta(1.0)
     }
+    @Test
+    fun exponent3in2() {
+        val actual = exponentation.exponent(3.0, 2)
+
+        assertThat(actual).isCloseToWithDelta(9.0)
+    }
+    @Test
+    fun exponent3in3() {
+        val actual = exponentation.exponent(3.0, 3)
+
+        assertThat(actual).isCloseToWithDelta(27.0)
+    }
 
 
 }

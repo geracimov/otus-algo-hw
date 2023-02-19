@@ -8,39 +8,31 @@ class IterateExponentiation : Exponentiation {
 
     override fun exponent(number: Double, power: Int): Double {
         if (power < 0) throw RuntimeException("power cannot be less 0")
-        if (power == 0) return 1.0
-        if (power == 1) return number
 
-        var result: Double = number
-        for (i in 2..power) {
+        var result = 1.0
+        for (i in 0 until power) {
             result *= number
         }
         return result
     }
 
 }
+
 class Division2Exponentiation : Exponentiation {
 
     override fun exponent(number: Double, power: Int): Double {
         if (power < 0) throw RuntimeException("power cannot be less 0")
-        if (power == 0) return 1.0
-        if (power == 1) return number
 
-        var n = power
-        var d = number
-        var p = 1.0
-        while (n >= 1) {
-            n /= 2
-            d *= d
-            if (n % 2 == 1) {
-                p *= d
-            }
+        var pow = power
+        var num = number
+        var result = 1.0
+        while (pow >= 1) {
+            if (pow % 2 == 1)
+                result *= num
+            num *= num
+            pow /= 2
         }
-        if (power % 2 == 1) {
-            p *= number
-        }
-
-        return p
+        return result
     }
 
 }
