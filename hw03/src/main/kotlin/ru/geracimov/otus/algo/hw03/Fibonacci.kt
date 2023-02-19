@@ -60,40 +60,40 @@ class MatrixFibonacci : Fibonacci {
         return m.pow(number - 1).a11
     }
 
-}
+    private class Matrix(
+        var a11: BigDecimal, var a12: BigDecimal,
+        var a21: BigDecimal, var a22: BigDecimal
+    ) {
 
-class Matrix(
-    var a11: BigDecimal, var a12: BigDecimal,
-    var a21: BigDecimal, var a22: BigDecimal
-) {
-
-    operator fun times(m: Matrix): Matrix {
-        return Matrix(
-            a11 = a11 * m.a11 + a12 * m.a21, a12 = a11 * m.a12 + a12 * m.a22,
-            a21 = a21 * m.a11 + a22 * m.a21, a22 = a21 * m.a12 + a22 * m.a22
-        )
-    }
-
-    fun pow(power: Int): Matrix {
-        if (power < 0) throw RuntimeException("power cannot be less 0")
-
-        var pow = power
-        var num = this
-        var result = Matrix(ONE, ZERO, ZERO, ONE)
-        while (pow >= 1) {
-            if (pow % 2 == 1)
-                result *= num
-            num *= num
-            pow /= 2
+        operator fun times(m: Matrix): Matrix {
+            return Matrix(
+                a11 = a11 * m.a11 + a12 * m.a21, a12 = a11 * m.a12 + a12 * m.a22,
+                a21 = a21 * m.a11 + a22 * m.a21, a22 = a21 * m.a12 + a22 * m.a22
+            )
         }
-        return result
-    }
 
-    override fun toString(): String {
-        return """
+        fun pow(power: Int): Matrix {
+            if (power < 0) throw RuntimeException("power cannot be less 0")
+
+            var pow = power
+            var num = this
+            var result = Matrix(ONE, ZERO, ZERO, ONE)
+            while (pow >= 1) {
+                if (pow % 2 == 1)
+                    result *= num
+                num *= num
+                pow /= 2
+            }
+            return result
+        }
+
+        override fun toString(): String {
+            return """
             |$a11    $a12|
             |$a21    $a22|
             """.trimIndent()
+        }
+
     }
 
 }
