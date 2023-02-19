@@ -1,6 +1,9 @@
 package ru.geracimov.otus.algo.hw03
 
 import java.math.BigDecimal
+import java.math.RoundingMode
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 interface Fibonacci {
     fun get(number: Int): BigDecimal
@@ -35,5 +38,14 @@ class RecursionFibonacci : Fibonacci {
         return get(number - 1) + get(number - 2)
     }
 
+}
+
+class FormulaFibonacci : Fibonacci {
+    private val sqrt5 = sqrt(5.0)
+    private val fi = (1 + sqrt5) / 2
+
+    override fun get(number: Int): BigDecimal {
+        return BigDecimal(fi.pow(number) / sqrt5 + 0.5).setScale(0, RoundingMode.DOWN)
+    }
 
 }
