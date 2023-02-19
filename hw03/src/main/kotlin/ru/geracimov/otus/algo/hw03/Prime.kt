@@ -1,5 +1,6 @@
 package ru.geracimov.otus.algo.hw03
 
+import java.util.BitSet
 import kotlin.math.roundToLong
 import kotlin.math.sqrt
 
@@ -64,6 +65,47 @@ class PrimesBasedPrimeCounter : PrimeCounter {
         }
 
         return true
+    }
+
+}
+
+class EratosthenesPrimeCounter : PrimeCounter {
+    override fun get(number: Long): Int {
+        val array = BooleanArray(number.toInt()) { true }
+        array[0] = false
+        array[1] = false
+
+        for (i in 2 until array.size) {
+            if (array[i]) {
+                var j = 2
+                while (i * j < array.size) {
+                    array[i * j] = false
+                    j++
+                }
+            }
+        }
+        return array.count { it }
+    }
+
+}
+
+class EratosthenesBitSetPrimeCounter : PrimeCounter {
+    override fun get(number: Long): Int {
+        val bitSet = BitSet(number.toInt())
+        bitSet.set(0, number.toInt(), true)
+        bitSet.set(0, false)
+        bitSet.set(1, false)
+
+        for (i in 2 until bitSet.length()) {
+            if (bitSet[i]) {
+                var j = 2
+                while (i * j < bitSet.length()) {
+                    bitSet[i * j] = false
+                    j++
+                }
+            }
+        }
+        return bitSet.cardinality()
     }
 
 }

@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.BeforeEach
 
-class PrimesBasedPrimeCounterTest {
+class EratosthenesBitSetPrimeCounterTest {
 
     lateinit var counter: PrimeCounter
 
     @BeforeEach
     fun setUp() {
-        counter = PrimesBasedPrimeCounter()
+        counter = EratosthenesBitSetPrimeCounter()
     }
 
     @Test
@@ -55,4 +55,8 @@ class PrimesBasedPrimeCounterTest {
         assertThat(counter.get(100_000_000)).isEqualTo(5761455)
     }
 
+    @Test
+    fun getCountIn1000000000() {
+        assertThat(counter.get(1_000_000_000)).isEqualTo(50847534)
+    }
 }

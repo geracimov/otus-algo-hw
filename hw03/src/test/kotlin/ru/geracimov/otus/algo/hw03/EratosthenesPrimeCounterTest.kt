@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.BeforeEach
 
-class PrimesBasedPrimeCounterTest {
+class EratosthenesPrimeCounterTest {
 
     lateinit var counter: PrimeCounter
 
     @BeforeEach
     fun setUp() {
-        counter = PrimesBasedPrimeCounter()
+        counter = EratosthenesPrimeCounter()
     }
 
     @Test
