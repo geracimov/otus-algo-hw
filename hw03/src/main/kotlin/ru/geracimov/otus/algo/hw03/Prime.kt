@@ -38,8 +38,9 @@ class IteratePrimeCounter : PrimeCounter {
 
 class PrimesBasedPrimeCounter : PrimeCounter {
     override fun get(number: Long): Int {
+        if (number < 2) return 0
         var count = 0
-        val size = (number / 2).toInt()
+        val size = (number / 2).toInt() + 1
         val primes = Array(size) { 0L }
 
         primes[count++] = 2
@@ -71,7 +72,7 @@ class PrimesBasedPrimeCounter : PrimeCounter {
 
 class EratosthenesPrimeCounter : PrimeCounter {
     override fun get(number: Long): Int {
-        val array = BooleanArray(number.toInt()) { true }
+        val array = BooleanArray(number.toInt() + 1) { true }
         array[0] = false
         array[1] = false
 
@@ -92,7 +93,7 @@ class EratosthenesPrimeCounter : PrimeCounter {
 class EratosthenesBitSetPrimeCounter : PrimeCounter {
     override fun get(number: Long): Int {
         val bitSet = BitSet(number.toInt())
-        bitSet.set(0, number.toInt(), true)
+        bitSet.set(0, number.toInt() + 1, true)
         bitSet.set(0, false)
         bitSet.set(1, false)
 

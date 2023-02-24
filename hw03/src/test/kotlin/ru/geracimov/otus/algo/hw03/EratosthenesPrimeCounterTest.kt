@@ -16,6 +16,21 @@ class EratosthenesPrimeCounterTest {
     }
 
     @Test
+    fun getCountIn1() {
+        assertThat(counter.get(1)).isEqualTo(0)
+    }
+
+    @Test
+    fun getCountIn2() {
+        assertThat(counter.get(2)).isEqualTo(1)
+    }
+
+    @Test
+    fun getCountIn3() {
+        assertThat(counter.get(3)).isEqualTo(2)
+    }
+
+    @Test
     fun getCountIn10() {
         assertThat(counter.get(10)).isEqualTo(4)
     }

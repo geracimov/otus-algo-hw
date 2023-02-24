@@ -1,12 +1,12 @@
 package ru.geracimov.otus.algo.hw03
 
 interface Exponentiation {
-    fun exponent(number: Double, power: Int): Double
+    fun exponent(number: Double, power: Long): Double
 }
 
 class IterateExponentiation : Exponentiation {
 
-    override fun exponent(number: Double, power: Int): Double {
+    override fun exponent(number: Double, power: Long): Double {
         if (power < 0) throw RuntimeException("power cannot be less 0")
 
         var result = 1.0
@@ -20,14 +20,14 @@ class IterateExponentiation : Exponentiation {
 
 class Division2Exponentiation : Exponentiation {
 
-    override fun exponent(number: Double, power: Int): Double {
+    override fun exponent(number: Double, power: Long): Double {
         if (power < 0) throw RuntimeException("power cannot be less 0")
 
         var pow = power
         var num = number
         var result = 1.0
         while (pow >= 1) {
-            if (pow % 2 == 1)
+            if (pow % 2 == 1L)
                 result *= num
             num *= num
             pow /= 2

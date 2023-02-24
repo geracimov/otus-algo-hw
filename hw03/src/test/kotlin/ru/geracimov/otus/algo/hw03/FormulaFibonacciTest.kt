@@ -70,5 +70,9 @@ class FormulaFibonacciTest {
     fun get10Test() {
         assertThat(fibonacci.get(10)).isEqualTo(BigDecimal.valueOf(55))
     }
+    @Test
+    fun get64Test() {
+        assertThat(fibonacci.get(64)).isEqualTo(BigDecimal.valueOf(10610209857723))
+    }
 
 }
