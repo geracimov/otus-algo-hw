@@ -17,11 +17,11 @@ class Knight : ChessFigure {
     override fun getMoves(position: Int): ULong {
         val k = getBitPosition(position)
 
-        val ka = k and ChessFigure.exceptColumnA //knightLeft
-        val kh = k and ChessFigure.exceptColumnH //knightRight
+        val ka = k and ChessFigure.exceptColumnA
+        val kh = k and ChessFigure.exceptColumnH
 
-        val kab = k and ChessFigure.exceptColumnAB //knightLeftDouble
-        val kgh = k and ChessFigure.exceptColumnGH //knightRightDouble
+        val kab = k and ChessFigure.exceptColumnAB
+        val kgh = k and ChessFigure.exceptColumnGH
 
         return (kab shl 6) or (kh shl 10) or (ka shl 15) or (kh shl 17) or
                 (kgh shr 6) or (ka shr 10) or (kh shr 15) or (ka shr 17)
