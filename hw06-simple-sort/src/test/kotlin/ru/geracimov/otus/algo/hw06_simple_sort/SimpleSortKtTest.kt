@@ -13,13 +13,14 @@ class SimpleSortKtTest {
 
     @BeforeEach
     fun setUp() {
-        generator = IntArrayGenerator(10)
-        array = generator.shuffle(100000)
+        generator = IntArrayGenerator()
+        array = generator.digits(100000)
         println(array.contentToString())
     }
 
     @Test
     fun bubbleSort() {
+        println(array)
 //        println(array.bubbleSort().contentToString())
         array.bubbleSort()
     }
