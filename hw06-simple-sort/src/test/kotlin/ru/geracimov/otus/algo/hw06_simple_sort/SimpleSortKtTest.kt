@@ -4,9 +4,13 @@ import assertk.assertThat
 import assertk.assertions.isTrue
 
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Timeout
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import java.util.concurrent.TimeUnit
 
 class SimpleSortKtTest {
     private lateinit var generator: IntArrayGenerator
@@ -17,8 +21,10 @@ class SimpleSortKtTest {
         generator = IntArrayGenerator(0xCAFEBABE)
     }
 
-    @ParameterizedTest(name = "[{index}] algorithm={1} generator={2} size={0}")
+    @ParameterizedTest(name = "[{index}] algorithm={1} - generator={2} - size={0}")
     @MethodSource("arguments")
+    @Execution(ExecutionMode.CONCURRENT)
+    @Timeout(value = 120, unit = TimeUnit.SECONDS, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
     fun sortArray(
         size: Int,
         algorithm: Function1<Array<Int>, Array<Int>>,
