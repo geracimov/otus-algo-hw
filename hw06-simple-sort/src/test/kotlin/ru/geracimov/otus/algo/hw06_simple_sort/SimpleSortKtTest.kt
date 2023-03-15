@@ -1,52 +1,72 @@
 package ru.geracimov.otus.algo.hw06_simple_sort
 
-import org.junit.jupiter.api.Test
+import assertk.assertThat
+import assertk.assertions.isTrue
 
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class SimpleSortKtTest {
-
-
     private lateinit var generator: IntArrayGenerator
-    private lateinit var array: Array<Int>
-
+    private val assertArrayIsSorted = true
 
     @BeforeEach
     fun setUp() {
-        generator = IntArrayGenerator()
-        array = generator.digits(100000)
-        println(array.contentToString())
+        generator = IntArrayGenerator(0xCAFEBABE)
     }
 
-    @Test
-    fun bubbleSort() {
-        println(array)
-//        println(array.bubbleSort().contentToString())
-        array.bubbleSort()
+    @ParameterizedTest(name = "[{index}] algorithm={1} generator={2} size={0}")
+    @MethodSource("arguments")
+    fun sortArray(
+        size: Int,
+        algorithm: Function1<Array<Int>, Array<Int>>,
+        generator: Function2<IntArrayGenerator, Int, Array<Int>>
+    ) {
+        val array = generator(this.generator, size)
+        algorithm(array)
+        if (assertArrayIsSorted) assertThat(array.isSorted()).isTrue()
     }
 
-    @Test
-    fun insertionSort() {
-//        println(array.insertionSort().contentToString())
-        array.insertionSort()
+    private fun Array<Int>.isSorted(): Boolean {
+        return (1 until this.size).none { this[it - 1] > this[it] }
     }
 
-    @Test
-    fun insertionShiftSort() {
-//        println(array.insertionShiftSort().contentToString())
-        array.insertionShiftSort()
-    }
+    companion object {
 
-    @Test
-    fun insertionShiftBinarySearchSort() {
-//        println(array.insertionShiftBinarySearchSort().contentToString())
-        array.insertionShiftBinarySearchSort()
-    }
+        @JvmStatic
+        fun arguments(): List<Arguments> {
+            val arguments = mutableListOf<Arguments>()
 
-    @Test
-    fun shellSort() {
-//        println(array.shellSort().contentToString())
-        array.shellSort()
-    }
+            for (algorithm in algorithms) {
+                for (generator in generators) {
+                    for (size in sizes) {
+                        arguments.add(Arguments.of(size, algorithm, generator))
+                    }
+                }
+            }
 
+            return arguments
+        }
+
+        private val algorithms = sequenceOf(
+            Array<Int>::bubbleSort,
+            Array<Int>::insertionSort,
+            Array<Int>::insertionShiftSort,
+            Array<Int>::insertionShiftBinarySearchSort,
+            Array<Int>::shellSort,
+        )
+
+        private val generators = sequenceOf(
+            IntArrayGenerator::random,
+            IntArrayGenerator::digits,
+            IntArrayGenerator::sorted,
+            IntArrayGenerator::reverse
+        )
+
+        private val sizes = sequenceOf(
+            1, 10, 100, 1_000, 10_000, 100_000, 1_000_000
+        )
+    }
 }
