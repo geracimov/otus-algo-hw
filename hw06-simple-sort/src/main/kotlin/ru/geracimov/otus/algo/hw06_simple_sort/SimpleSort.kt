@@ -65,23 +65,3 @@ fun <T : Comparable<T>> Array<T>.shellSort(): Array<T> {
     }
     return this
 }
-
-private fun <T : Comparable<T>> Array<T>.binarySearch(k: T, low: Int, high: Int): Int {
-    if (high <= low) {
-        return if (k >= this[low]) {
-            low + 1
-        } else low
-    }
-    val mid = (low + high) / 2
-    return if (k > this[mid]) {
-        binarySearch(k, mid + 1, high)
-    } else {
-        binarySearch(k, low, mid - 1)
-    }
-}
-
-private fun <T> Array<T>.swap(i: Int, j: Int) {
-    val ai = this[i]
-    this[i] = this[j]
-    this[j] = ai
-}

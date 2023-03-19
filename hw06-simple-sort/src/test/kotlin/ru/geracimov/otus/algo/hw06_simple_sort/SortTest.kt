@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.concurrent.TimeUnit
 
-class SimpleSortKtTest {
+class SortTest {
     private lateinit var generator: IntArrayGenerator
     private val assertArrayIsSorted = true
 
@@ -62,6 +62,8 @@ class SimpleSortKtTest {
             Array<Int>::insertionShiftSort,
             Array<Int>::insertionShiftBinarySearchSort,
             Array<Int>::shellSort,
+            Array<Int>::selectionSort,
+            Array<Int>::heapSort,
         )
 
         private val generators = sequenceOf(
