@@ -64,6 +64,8 @@ class SortTest {
             Array<Int>::shellSort,
             Array<Int>::selectionSort,
             Array<Int>::heapSort,
+            Array<Int>::quickSort,
+            Array<Int>::mergeSort,
         )
 
         private val generators = sequenceOf(
