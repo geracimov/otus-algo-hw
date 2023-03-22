@@ -35,14 +35,11 @@ class SortTest {
         if (assertArrayIsSorted) assertThat(array.isSorted()).isTrue()
     }
 
-    private fun Array<Int>.isSorted(): Boolean {
-        return (1 until this.size).none { this[it - 1] > this[it] }
-    }
 
     companion object {
 
         @JvmStatic
-        fun arguments(): List<Arguments> {
+        fun arguments(): MutableList<Arguments> {
             val arguments = mutableListOf<Arguments>()
 
             for (algorithm in algorithms) {

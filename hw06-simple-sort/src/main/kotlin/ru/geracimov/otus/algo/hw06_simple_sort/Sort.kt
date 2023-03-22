@@ -48,3 +48,7 @@ fun <T : Comparable<T>> Array<T>.heapify(root: Int, size: Int = this.size): Arra
     heapify(max, size)
     return this
 }
+
+fun <T : Comparable<T>> Array<T>.isSorted(): Boolean {
+    return (1 until size).none { this[it - 1] > this[it] }
+}
