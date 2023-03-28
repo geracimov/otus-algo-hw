@@ -1,5 +1,9 @@
 package ru.geracimov.otus.algo.hw06_simple_sort
 
+import kotlin.math.abs
+import kotlin.math.log10
+import kotlin.math.pow
+
 
 fun <T : Comparable<T>> Array<T>.binarySearch(k: T, low: Int, high: Int): Int {
     if (high <= low) {
@@ -51,4 +55,14 @@ fun <T : Comparable<T>> Array<T>.heapify(root: Int, size: Int = this.size): Arra
 
 fun <T : Comparable<T>> Array<T>.isSorted(): Boolean {
     return (1 until size).none { this[it - 1] > this[it] }
+}
+
+fun Int.length() = when (this) {
+    0 -> 1
+    else -> log10(abs(toDouble())).toInt() + 1
+}
+
+fun getRadix(int: Int, radixPosition: Int): Int {
+    val divider = 10.0.pow(radixPosition).toInt()
+    return (int % divider) / (divider / 10)
 }

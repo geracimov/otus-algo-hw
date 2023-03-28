@@ -3,6 +3,7 @@ package ru.geracimov.otus.algo.hw06_simple_sort
 import java.util.*
 
 interface ArrayGenerator<T> {
+    fun limit1k(size: Int): Array<T>
     fun random(size: Int): Array<T>
     fun digits(size: Int): Array<T>
     fun sorted(size: Int): Array<T>
@@ -13,6 +14,9 @@ interface ArrayGenerator<T> {
 class IntArrayGenerator(seed: Long = 0L) : ArrayGenerator<Int> {
     private val random = Random(seed)
     private fun generateArray(size: Int, bound: Int): Array<Int> = Array(size) { random.nextInt(bound) }
+    override fun limit1k(size: Int): Array<Int> {
+        return generateArray(size, 1000)
+    }
 
     override fun random(size: Int): Array<Int> {
         return generateArray(size, Int.MAX_VALUE)

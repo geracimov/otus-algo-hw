@@ -63,17 +63,21 @@ class SortTest {
             Array<Int>::heapSort,
             Array<Int>::quickSort,
             Array<Int>::mergeSort,
+            Array<Int>::bucketSort,
+            Array<Int>::countingSort,
+            Array<Int>::radixSort,
         )
 
         private val generators = sequenceOf(
             IntArrayGenerator::random,
             IntArrayGenerator::digits,
+            IntArrayGenerator::limit1k,
             IntArrayGenerator::sorted,
             IntArrayGenerator::reverse
         )
 
         private val sizes = sequenceOf(
-            1, 10, 100, 1_000, 10_000, 100_000, 1_000_000
+            1, 10, 100, 1_000, 10_000, 100_000, 1_000_000, 10_000_000
         )
     }
 }
