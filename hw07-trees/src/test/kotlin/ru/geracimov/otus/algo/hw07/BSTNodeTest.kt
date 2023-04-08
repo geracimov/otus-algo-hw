@@ -6,6 +6,7 @@ import assertk.assertions.isNull
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.BeforeEach
+import kotlin.random.Random
 
 class BSTNodeTest {
     private lateinit var tree: BSTNode<Int, String>
@@ -85,5 +86,35 @@ class BSTNodeTest {
         assertThat(tree.search(6)).isEqualTo("six")
 
         assertThat(removed).isNull()
+    }
+
+    @Test
+    fun treeTestRandomValue() {
+        val root = BSTNode(0, "root")
+        test(root, 200000) { _, limit -> Random.nextInt(limit) }
+    }
+
+    @Test
+    fun treeTestOrderedValue() {
+        val root = BSTNode(0, "root")
+        test(root, 200000) { i, _ -> i }
+    }
+
+    private fun test(tree: Tree<Int, String>, limit: Int, generator: (Int, Int) -> Int) {
+
+        for (i in 1..limit) {
+            val int = generator.invoke(i, limit)
+            tree.insert(int, int.toString())
+        }
+
+        for (i in 1..10) {
+            val int = Random.nextInt(limit)
+            tree.search(int)
+        }
+
+        for (i in 1..10) {
+            val int = Random.nextInt(limit)
+            tree.remove(int)
+        }
     }
 }
