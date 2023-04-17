@@ -35,14 +35,11 @@ class SortTest {
         if (assertArrayIsSorted) assertThat(array.isSorted()).isTrue()
     }
 
-    private fun Array<Int>.isSorted(): Boolean {
-        return (1 until this.size).none { this[it - 1] > this[it] }
-    }
 
     companion object {
 
         @JvmStatic
-        fun arguments(): List<Arguments> {
+        fun arguments(): MutableList<Arguments> {
             val arguments = mutableListOf<Arguments>()
 
             for (algorithm in algorithms) {
@@ -66,17 +63,21 @@ class SortTest {
             Array<Int>::heapSort,
             Array<Int>::quickSort,
             Array<Int>::mergeSort,
+            Array<Int>::bucketSort,
+            Array<Int>::countingSort,
+            Array<Int>::radixSort,
         )
 
         private val generators = sequenceOf(
             IntArrayGenerator::random,
             IntArrayGenerator::digits,
+            IntArrayGenerator::limit1k,
             IntArrayGenerator::sorted,
             IntArrayGenerator::reverse
         )
 
         private val sizes = sequenceOf(
-            1, 10, 100, 1_000, 10_000, 100_000, 1_000_000
+            1, 10, 100, 1_000, 10_000, 100_000, 1_000_000, 10_000_000
         )
     }
 }
